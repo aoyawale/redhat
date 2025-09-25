@@ -1,0 +1,25 @@
+---
+
+- name:
+  community.okd.oc:
+    
+- name: OC Delete
+  ansible.builtin.shell: 'oc delete deployment triton-llama3 --ignore-not-found oc delete svc triton-llama3-svc --ignore-not-found oc delete route triton-llama3 --ignore-not-found oc delete configmap llama3-triton-config --ignore-not-found oc delete pvc llama3-model-pvc --ignore-not-found oc delete pod -l app=triton-llama3 --ignore-not-found'
+
+- name: OC Project
+  ansible.builtin.shell: 'oc project vllm-vs-tgi'
+
+- name: create user? with uri
+  ansible.builtin.uri:
+    url: 'https://{{ ocp_host }}/v1/chat/completions'
+    method: POST
+    body_format: json
+    status_code: [200, 202]
+    return_content: true
+    headers:
+      Content-Type: application/json
+      x-ms-client-workspace-path: '/subscriptions/{{ sub_id }}/resourcegroups/{{ res_group }}/providers/microsoft.operationalinsights/workspaces/{{ w_spaces }}'
+      x-ms-client-platform: ibiza
+      x-ms-client-auth-token: "{{ hf_token }}"
+    body:
+     '{ "model": "meta-llama/Meta-Llama-3-8B-Instruct", "messages": [ { "role": "system", "content": "You are a concise assistant." }, { "role": "user", "content": "In one sentence, what is OpenShift?" } ], "max_tokens": 32, "temperature": 0.7 }'

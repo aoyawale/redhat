@@ -1,0 +1,21 @@
+#SPDX-License-Identifier: MIT-0
+---
+
+- name: Install OC on the local execution node using rpm
+  ansible.builtin.dnf:
+    name: openshift-clients
+    state: latest
+  tags: oc_rpm
+
+- name: Download OC binary and kubectl
+  ansible.builtin.unarchive:
+    src: "{{ oc_binary_link }}"
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Change permissions of OC binaries
+  ansible.builtin.file:
+    path: "{{ oc_binary_files }}"
+    mode: "{{ oc_perms }}"
+  loop: oc_binary_files
+
