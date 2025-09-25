@@ -23,3 +23,6 @@
       x-ms-client-auth-token: "{{ hf_token }}"
     body:
      '{ "model": "meta-llama/Meta-Llama-3-8B-Instruct", "messages": [ { "role": "system", "content": "You are a concise assistant." }, { "role": "user", "content": "In one sentence, what is OpenShift?" } ], "max_tokens": 32, "temperature": 0.7 }'
+
+- name: OC Create command
+  ansible.builtin.shell: 'oc create sa tgi-sa -n default --dry-run=client -o yaml | oc apply -f - oc adm policy add-scc-to-user anyuid -z tgi-sa -n default'
