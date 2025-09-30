@@ -1,0 +1,8 @@
+---
+collections:
+  - name: infra.aap_utilities
+  - name: ansible.posix
+  - name: kuburnetes.core
+  - name: redhat.openshift
+    # If you need a specific version of the collection, you can specify like this:
+    # version: ...

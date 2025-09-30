@@ -1,0 +1,7 @@
+---
+
+- name: Download the required software from RHEL site
+  hosts: installationserver
+  roles:
+    - { role: infra.aap_utilities.aap_setup_download }
+    - { role: infra.aap_utilities.aap_setup_prepare }
