@@ -8,7 +8,13 @@ ocp_installer_init_directory: '$PWD/rhocp_init'
 ocp_cluster_hosts_private_key: '/root/.ssh/hosts_rsa'
 ocp_resource_prefix: 'ocp-test'
 ibmcloud_target_rg: 'default'
----
+ocp_directories:
+  - '$ocp_installer_work_directory/cli_tar'
+  - '$ocp_installer_work_directory/cli_extracted'
+  - '$ocp_installer_work_directory/installer_tar'
+  - '$ocp_installer_work_directory/installer_extracted'
+  - '$ocp_installer_work_directory/ccoctl_credentials_requests'
+  - '$ocp_installer_init_directory'
 # defaults file for aap_setup_download
 
 # Acquire your token at https://access.redhat.com/management/api/
