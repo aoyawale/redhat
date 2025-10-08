@@ -1,0 +1,16 @@
+---
+
+community.okd.oc:
+  ca_cert:
+  client_cert:
+  client_key:
+  oc_container:
+  oc_context:
+  oc_extra_args:
+  oc_host:
+  oc_kubeconfig:
+  oc_local_env_vars:
+  oc_namespace:
+  oc_pod:
+  oc_token:
+  validate_certs:
